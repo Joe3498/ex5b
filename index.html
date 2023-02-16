@@ -12,10 +12,10 @@
     <div class="container-fluid">
 		<h1>Temperature conversion</h1>
 		<img src="images/temperature.gif" class="img-fluid" alt="runner logo" width="150" height="150"><br><hr>
-		
+
 		<form role="form" method="GET">
 		  <div class="form-group">
-			<label for="tem">Current temperature:</label>
+			<label for="tem"> Current temperature(Celsius):</label>
 			<input type="text" class="form-control" name="temp" id="temp" value="20">
 		  </div><br>
 		  <div class="form-group">
@@ -38,21 +38,40 @@
 			   var t = $('#temp').val();//celsius
 			   var u = $('#unit').val();
 			   
-			   if(isNaN(t)){
+			    var chk = validate(t);
+				if(chk != null)
+				{
+					return;
+				}
+			  
+			   var t2 = conversion(t);
+			   var u1 = praseStr(u);
+			   
+			   document.getElementById("result").innerHTML = "Temperature is "+t2+" in "+u1;
+			   
+			
+	
+			});
+		});
+
+		function validate(t)
+		{
+			if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
 					alert(msg);
-					return;
+					return ;
 			   }
 			   if(!(t >= -100 && t <= 100)){
 					msg = "Tempurature entered (in Celsius) must be between 0 and 100 C'";
 					alert(msg);
-					return;
+					return ;
 			   }
-			   
-			   var t1;
-			   var u1;
-			   
-			   if(u == "F"){
+		}
+
+		function conversion(t,u)
+		{
+			var t1 = parseFloat(t);
+			if(u == "F"){
 					t1 = t * (9/5) + 32;
 					u1 = "Fahrenheit";
 			   }else if(u == "K"){
@@ -62,10 +81,22 @@
 					t1 = t * (4/5);
 					u1 = "Kelvin";
 			   }
-			   
-			   alert("Temperature is "+t1+" in "+u1);
-			});
-		});
+			   return t1;
+		}
+
+		function praseStr(u)
+		{
+			var u1 = "";
+			if(u == "F"){
+					u1 = "Fahrenheit";
+			   }else if(u == "K"){
+					u1 = "Réaumur";
+			   }else if(u == "R"){
+					u1 = "Kelvin";
+			   }
+			   return u1;
+		}
+		
 	</script>
 </body>
 </html>
