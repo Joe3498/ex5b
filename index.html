@@ -45,11 +45,11 @@
 				}
 			  
 			   var t2 = conversion(t);
-			   var u1;
+			   var u1 = praseStr(u);
 			   
+			   document.getElementById("result").innerHTML = "Temperature is "+t2+" in "+u1;
 			   
-			   
-			   alert("Temperature is "+t2+" in "+u);
+			
 	
 			});
 		});
@@ -82,6 +82,19 @@
 					u1 = "Kelvin";
 			   }
 			   return t1;
+		}
+
+		function praseStr(u)
+		{
+			var u1 = "";
+			if(u == "F"){
+					u1 = "Fahrenheit";
+			   }else if(u == "K"){
+					u1 = "Réaumur";
+			   }else if(u == "R"){
+					u1 = "Kelvin";
+			   }
+			   return u1;
 		}
 		
 	</script>
